@@ -1,0 +1,26 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "Petsitter": {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "database": "petsitter",
+    "password": "password",
+    "name": "Petsitter",
+    "user": "root",
+    "connector": "mysql"
+  },
+  "review": {
+    "host": "localhost",
+    "port": 27017,
+    "url": "mongodb://127.0.0.1:27017/Review",
+    "database": "review",
+    "password": "",
+    "name": "review",
+    "user": "",
+    "useNewUrlParser": true,
+    "connector": "mongodb"
+  }
+}

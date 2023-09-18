@@ -1,0 +1,46 @@
+{
+  "name": "review",
+  "plural": "reviews",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "dataSource": "review",
+  "properties": {
+    "rating": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "comments": {
+      "type": "string",
+      "required": true
+    },
+    "petsitterId": {
+      "type": "number",
+      "required": true
+    },
+    "userId": {
+      "type": "number",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "petsitter": {
+      "type": "hasOne",
+      "model": "petsitter",
+      "foreignKey": "id",
+      "primaryKey": "petsitterId"
+    },
+    "user": {
+      "type": "hasOne",
+      "model": "usuario",
+      "foreignKey": "id",
+      "primaryKey": "userId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

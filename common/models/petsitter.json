@@ -1,0 +1,66 @@
+{
+  "name": "petsitter",
+  "plural": "petsitters",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "lastname": {
+      "type": "string",
+      "required": true
+    },
+    "photoURL": {
+      "type": "string",
+      "required": true
+    },
+    "phone": {
+      "type": "number",
+      "required": true
+    },
+    "email": {
+      "type": "string",
+      "required": false
+    },
+    "age": {
+      "type": "number",
+      "required": true
+    },
+    "cityId": {
+      "type": "number",
+      "required": false
+    },
+    "pettypeId": {
+      "type": "number"
+
+    }
+  },
+  "validations": [],
+  "relations": {
+    "city": {
+      "type": "hasOne",
+      "model": "city",
+      "foreignKey": "id",
+      "primaryKey": "cityId"
+    },
+    "review": {
+      "type": "hasMany",
+      "model": "review",
+      "foreignKey": "petsitterId",
+      "primaryKey": "id"
+    },
+    "pettype": { 
+      "type": "hasMany", 
+      "model": "pettype", 
+      "foreignKey": "id", 
+      "primaryKey": "pettypeId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
