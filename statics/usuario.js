@@ -83,7 +83,7 @@ module.exports = function (UsuarioController) {
             const passwordMatches = await bcrypt.compare(password, user.password);
 
             if (passwordMatches) {
-                const token = jwt.sign({ userId: user.id, email: user.email, name: user.name, lastname: user.lastname }, 'secret', {
+                const token = jwt.sign({ userId: user.id, email: user.email, name: user.name, lastname: user.lastname, photoURL: user.photoURL }, 'secret', {
                   expiresIn: '1h',
                 });
 
