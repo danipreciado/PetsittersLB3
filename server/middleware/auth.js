@@ -17,6 +17,7 @@ module.exports = function(secret) {
    
    try {
       const validToken = jwt.verify(accessToken, 'secret');
+      
       req.user = validToken;
       if (validToken) {
         return next();

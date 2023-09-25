@@ -22,6 +22,40 @@ module.exports = function (Petsitter) {
         }
     }),
 
+    Petsitter.remoteMethod('getAllPetsittersByName', {
+        description: '',
+        http: {
+            path: '/search/:name',
+            verb: 'get'
+        },
+        accepts: [
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        returns: {
+            arg: 'response',
+            type: 'object',
+            root: true
+        }
+    }),
+
+   Petsitter.remoteMethod('getAllPetsittersByCity', {
+        description: '',
+        http: {
+            path: '/searchByCity/:city',
+            verb: 'get'
+        },
+        accepts: [
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        returns: {
+            arg: 'response',
+            type: 'object',
+            root: true
+        }
+    }), 
+
         // Crear un nuevo petsitter
         Petsitter.remoteMethod('createPetsitter', {
             description: 'Create a new Petsitter',

@@ -22,6 +22,23 @@ module.exports = function (Review) {
         }
     }),
 
+    Review.remoteMethod('getBestRated', {
+        description: 'Get top 10 best rated',
+        http: {
+            path: '/bestrated',
+            verb: 'get'
+        },
+        accepts: [
+            { arg: 'req', type: 'object', http: { source: 'req' } },
+            { arg: 'res', type: 'object', http: { source: 'res' } }
+        ],
+        returns: {
+            arg: 'response',
+            type: 'object',
+            root: true
+        }
+    }),
+
     Review.remoteMethod('getAllPetsittersReviews', {
         description: 'Get all reviews filtered by petsitter',
         http: {

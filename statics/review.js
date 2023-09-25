@@ -12,6 +12,23 @@ module.exports = function (ReviewController) {
         }
     };
 
+    ReviewController.getBestRated = async function (req, res) {
+        try {
+            const reviews = await ReviewController.find({
+                limit: 10,
+                where: {
+                    rating: 5
+                },
+                include: {
+                    relation: "petsitter"
+                }
+            });
+            res.status(201).json(reviews);
+        } catch (error) {
+            res.status(500).json({ error: 'An error occurred' });
+        }
+    };
+
     ReviewController.createReview = async function (req, res) {
         try {
             const newReview = await ReviewController.create(req.body);

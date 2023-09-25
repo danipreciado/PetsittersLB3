@@ -12,16 +12,77 @@ module.exports = function (PetsitterController) {
   */
 
     PetsitterController.getAllPetsitters = async function (req, res) {
+    
       
       try {
+        
           const petsitters = await PetsitterController.find({
-              include: [{'city': 'state'}, 'pettype']
+              include: [{'city': 'state'}, 'pettype', 'review']
             });
           res.status(201).json(petsitters);
       } catch (error) {
         console.log(error);
           res.status(500).json({ error: 'An error occurred' });
       }
+  };
+
+  PetsitterController.getAllPetsittersByName = async function (req, res) {
+    try {
+      
+      const { name } = req.params;
+     
+  
+      const filter = {
+        where: {
+          name: {
+            like: `${name}%`
+          }
+        },
+        include: [ {'city': 'state'}, 'pettype', 'review'] 
+      };
+  
+      const petsitters = await PetsitterController.find(filter); 
+  
+      res.status(200).json(petsitters);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  };
+
+  PetsitterController.getAllPetsittersByCity = async function (req, res) {
+    try {
+
+      const { city } = req.params;
+    
+      const filtered = {
+        include: [
+          {
+            relation: 'city',
+            scope: {
+              where: { name: {
+                like: `${city}%`
+              } },
+              include: 'state'
+            }
+          },
+          'pettype',
+          'review'
+        ],
+      };
+  
+      
+      const petsitters = await PetsitterController.find(filtered);
+  
+      
+      const filteredResults = petsitters.filter(result => result.city() !== null);
+
+  
+      res.status(200).json(filteredResults);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred' });
+    }
   };
 
     PetsitterController.createPetsitter = async function (req, res) {
@@ -58,7 +119,7 @@ module.exports = function (PetsitterController) {
               }
             }]
           });
-          console.log(petsitter);
+          
           if (!petsitter) {
             res.status(404).json({ error: 'Petsitter not found' });
           } else {
